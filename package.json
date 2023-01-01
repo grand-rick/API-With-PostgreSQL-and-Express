@@ -18,6 +18,8 @@
   "dependencies": {
     "@types/express": "^4.17.15",
     "body-parser": "^1.20.1",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "pg": "^8.8.0",
