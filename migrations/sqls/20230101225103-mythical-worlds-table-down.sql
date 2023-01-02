@@ -1,0 +1,1 @@
+DROP TABLE mythical_table;
