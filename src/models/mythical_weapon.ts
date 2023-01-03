@@ -39,10 +39,10 @@ export class MythicalWeaponStore {
 
 	async show(id: string): Promise<Weapon> {
 		try {
-			const conn = client.connect();
+			const conn = await client.connect();
 			const sql = 'SELECT * FROM mythical_weapons WHERE id = ($1)';
 
-			const result = conn.query(sql, [id]);
+			const result = await conn.query(sql, [id]);
 			conn.release();
 
 			const Weapon = result.rows[0];
@@ -55,10 +55,10 @@ export class MythicalWeaponStore {
 
 	async create(w: Weapon): Promise<Weapon> {
 		try {
-			const conn = client.connect();
+			const conn = await client.connect();
 			const sql = 'INSERT INTO mythical_weapons (name, type, weight) VALUES($1, $2, $3)';
 
-			const result = conn.query(sql, [w.name, w.type, w.weight]);
+			const result = await conn.query(sql, [w.name, w.type, w.weight]);
 
 			conn.release();
 			const Weapon = result.rows[0];
