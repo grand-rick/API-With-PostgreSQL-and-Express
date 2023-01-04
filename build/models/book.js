@@ -39,12 +39,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MythicalWeaponStore = void 0;
+exports.BookStore = void 0;
 var database_1 = __importDefault(require("../database"));
-var MythicalWeaponStore = /** @class */ (function () {
-    function MythicalWeaponStore() {
+var BookStore = /** @class */ (function () {
+    function BookStore() {
     }
-    MythicalWeaponStore.prototype.index = function () {
+    BookStore.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, error_1;
             return __generator(this, function (_a) {
@@ -54,7 +54,7 @@ var MythicalWeaponStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM mythical_weapons';
+                        sql = 'SELECT * FROM full_stack_dev';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
@@ -62,15 +62,16 @@ var MythicalWeaponStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         error_1 = _a.sent();
-                        throw new Error("Cannot get weapons ".concat(error_1));
+                        throw new Error("Couldn't open book ".concat(error_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    MythicalWeaponStore.prototype.delete = function (id) {
+    // GET (READ)
+    BookStore.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, Weapon, error_2;
+            var conn, sql, result, book, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -78,24 +79,25 @@ var MythicalWeaponStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'DELETE FROM mythical_weapons WHERE id = ($1)';
+                        sql = 'SELECT * FROM books where id = ($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        Weapon = result.rows[0];
-                        return [2 /*return*/, Weapon];
+                        book = result.rows[0];
+                        return [2 /*return*/, book];
                     case 3:
                         error_2 = _a.sent();
-                        throw new Error("Couldn't delete weapon. Error ".concat(error_2));
+                        throw new Error("Couldn't show book ".concat(error_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    MythicalWeaponStore.prototype.show = function (id) {
+    // CREATE
+    BookStore.prototype.create = function (b) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, Weapon, error_3;
+            var conn, sql, result, book, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -103,46 +105,47 @@ var MythicalWeaponStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM mythical_weapons WHERE id = ($1)';
+                        sql = 'INSERT INTO books(title, author, totalPages, summary) VALUES($1, $2, $3, $4)';
+                        return [4 /*yield*/, conn.query(sql, [b.title, b.author, b.totalPages, b.summary])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        book = result.rows[0];
+                        return [2 /*return*/, book];
+                    case 3:
+                        error_3 = _a.sent();
+                        throw new Error("Couldn't add new book. Error:".concat(error_3));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // DELETE
+    BookStore.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, book, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'DELETE FROM books WERE id = ($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        Weapon = result.rows[0];
-                        return [2 /*return*/, Weapon];
-                    case 3:
-                        error_3 = _a.sent();
-                        throw new Error("Can't show weapon. Error ".concat(error_3));
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MythicalWeaponStore.prototype.create = function (w) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, Weapon, error_4;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1.default.connect()];
-                    case 1:
-                        conn = _a.sent();
-                        sql = 'INSERT INTO mythical_weapons (name, type, weight) VALUES($1, $2, $3)';
-                        return [4 /*yield*/, conn.query(sql, [w.name, w.type, w.weight])];
-                    case 2:
-                        result = _a.sent();
-                        conn.release();
-                        Weapon = result.rows[0];
-                        return [2 /*return*/, Weapon];
+                        book = result.rows[0];
+                        return [2 /*return*/, book];
                     case 3:
                         error_4 = _a.sent();
-                        throw new Error("Can't create a weapon. Error: ".concat(error_4));
+                        throw new Error("Couldn't delete book. Error: ".concat(error_4));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    return MythicalWeaponStore;
+    return BookStore;
 }());
-exports.MythicalWeaponStore = MythicalWeaponStore;
+exports.BookStore = BookStore;
