@@ -54,7 +54,7 @@ var BookStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM full_stack_dev';
+                        sql = 'SELECT * FROM books';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();

@@ -12,7 +12,7 @@ export class BookStore {
     async index(): Promise<Book[]> {
         try {
             const conn = await client.connect();
-            const sql = 'SELECT * FROM full_stack_dev';
+            const sql = 'SELECT * FROM books';
             const result = await conn.query(sql);
             conn.release();
             return result.rows;
@@ -21,7 +21,7 @@ export class BookStore {
         }
     }
     // GET (READ)
-    async show(id: string): Promise<Book> {
+    async show(id: number): Promise<Book> {
         try {
             const conn = await client.connect();
             const sql = 'SELECT * FROM books where id = ($1)';
@@ -49,7 +49,7 @@ export class BookStore {
     }
 
     // DELETE
-    async delete(id: string): Promise<Book> {
+    async delete(id: number): Promise<Book> {
         try {
             const conn = await client.connect();
             const sql = 'DELETE FROM books WERE id = ($1)';
