@@ -60,17 +60,18 @@ describe("Book Model", function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, store.create({
                         title: 'Bridge to Terabithia',
-                        totalPages: 250,
                         author: 'Katherine Paterson',
+                        totalPages: 250,
                         summary: 'Childrens'
                     })];
                 case 1:
                     result = _a.sent();
+                    console.log(result);
                     expect(result).toEqual({
                         id: 1,
                         title: 'Bridge to Terabithia',
-                        totalPages: 250,
                         author: 'Katherine Paterson',
+                        totalPages: 250,
                         summary: 'Childrens'
                     });
                     return [2 /*return*/];
@@ -84,11 +85,12 @@ describe("Book Model", function () {
                 case 0: return [4 /*yield*/, store.index()];
                 case 1:
                     result = _a.sent();
+                    console.log(result);
                     expect(result).toEqual([{
                             id: 1,
                             title: 'Bridge to Terabithia',
-                            totalPages: 250,
                             author: 'Katherine Paterson',
+                            totalPages: 250,
                             summary: 'Childrens'
                         }]);
                     return [2 /*return*/];
@@ -99,14 +101,15 @@ describe("Book Model", function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, store.show("1")];
+                case 0: return [4 /*yield*/, store.show(1)];
                 case 1:
                     result = _a.sent();
+                    console.log(result);
                     expect(result).toEqual({
                         id: 1,
                         title: 'Bridge to Terabithia',
-                        totalPages: 250,
                         author: 'Katherine Paterson',
+                        totalPages: 250,
                         summary: 'Childrens'
                     });
                     return [2 /*return*/];
@@ -118,10 +121,11 @@ describe("Book Model", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    store.delete("1");
+                    store.delete(1);
                     return [4 /*yield*/, store.index()];
                 case 1:
                     result = _a.sent();
+                    console.log(result);
                     expect(result).toEqual([]);
                     return [2 /*return*/];
             }

@@ -26,45 +26,48 @@ describe("Book Model", () => {
   it('create method should add a book', async () => {
     const result = await store.create({
       title: 'Bridge to Terabithia',
-      totalPages: 250,
       author: 'Katherine Paterson',
+      totalPages: 250,
       summary: 'Childrens'
     });
+    console.log(result);
     expect(result).toEqual({
       id: 1,
       title: 'Bridge to Terabithia',
-      totalPages: 250,
       author: 'Katherine Paterson',
+      totalPages: 250,
       summary: 'Childrens'
     });
   });
 
   it('index method should return a list of books', async () => {
     const result = await store.index();
+    console.log(result);
     expect(result).toEqual([{
       id: 1,
       title: 'Bridge to Terabithia',
-      totalPages: 250,
       author: 'Katherine Paterson',
+      totalPages: 250,
       summary: 'Childrens'
     }]);
   });
 
   it('show method should return the correct book', async () => {
-    const result = await store.show("1");
+    const result = await store.show(1);
+    console.log(result);
     expect(result).toEqual({
       id: 1,
       title: 'Bridge to Terabithia',
-      totalPages: 250,
       author: 'Katherine Paterson',
+      totalPages: 250,
       summary: 'Childrens'
     });
   });
 
   it('delete method should remove the book', async () => {
-    store.delete("1");
-    const result = await store.index()
-
+    store.delete(1);
+    const result = await store.index();
+    console.log(result);
     expect(result).toEqual([]);
   });
 });
