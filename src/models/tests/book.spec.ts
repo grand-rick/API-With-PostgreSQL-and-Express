@@ -27,7 +27,7 @@ describe("Book Model", () => {
     const result = await store.create({
       title: 'Bridge to Terabithia',
       author: 'Katherine Paterson',
-      totalPages: 250,
+      total_pages: 250,
       summary: 'Childrens'
     });
     console.log(result);
@@ -35,7 +35,7 @@ describe("Book Model", () => {
       id: 1,
       title: 'Bridge to Terabithia',
       author: 'Katherine Paterson',
-      totalPages: 250,
+      total_pages: 250,
       summary: 'Childrens'
     });
   });
@@ -47,7 +47,7 @@ describe("Book Model", () => {
       id: 1,
       title: 'Bridge to Terabithia',
       author: 'Katherine Paterson',
-      totalPages: 250,
+      total_pages: 250,
       summary: 'Childrens'
     }]);
   });
@@ -59,7 +59,7 @@ describe("Book Model", () => {
       id: 1,
       title: 'Bridge to Terabithia',
       author: 'Katherine Paterson',
-      totalPages: 250,
+      total_pages: 250,
       summary: 'Childrens'
     });
   });

@@ -4,7 +4,7 @@ export type Book = {
     id?: number;
     title: string;
     author: string;
-    totalPages: number;
+    total_pages: number;
     summary: string;
 }
 
@@ -38,8 +38,8 @@ export class BookStore {
     async create(b: Book): Promise<Book> {
         try {
             const conn = await client.connect();
-            const sql = 'INSERT INTO books(title, author, totalPages, summary) VALUES($1, $2, $3, $4)';
-            const result = await conn.query(sql, [b.title, b.author, b.totalPages, b.summary]);
+            const sql = 'INSERT INTO books(title, author, total_pages, summary) VALUES($1, $2, $3, $4)';
+            const result = await conn.query(sql, [b.title, b.author, b.total_pages, b.summary]);
             conn.release();
             const book = result.rows[0];
             return book;
@@ -52,7 +52,7 @@ export class BookStore {
     async delete(id: number): Promise<Book> {
         try {
             const conn = await client.connect();
-            const sql = 'DELETE FROM books WERE id = ($1)';
+            const sql = 'DELETE FROM books WHERE id = ($1)';
             const result = await conn.query(sql, [id]);
             conn.release();
             const book = result.rows[0];

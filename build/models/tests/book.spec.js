@@ -61,7 +61,7 @@ describe("Book Model", function () {
                 case 0: return [4 /*yield*/, store.create({
                         title: 'Bridge to Terabithia',
                         author: 'Katherine Paterson',
-                        totalPages: 250,
+                        total_pages: 250,
                         summary: 'Childrens'
                     })];
                 case 1:
@@ -71,7 +71,7 @@ describe("Book Model", function () {
                         id: 1,
                         title: 'Bridge to Terabithia',
                         author: 'Katherine Paterson',
-                        totalPages: 250,
+                        total_pages: 250,
                         summary: 'Childrens'
                     });
                     return [2 /*return*/];
@@ -90,7 +90,7 @@ describe("Book Model", function () {
                             id: 1,
                             title: 'Bridge to Terabithia',
                             author: 'Katherine Paterson',
-                            totalPages: 250,
+                            total_pages: 250,
                             summary: 'Childrens'
                         }]);
                     return [2 /*return*/];
@@ -109,7 +109,7 @@ describe("Book Model", function () {
                         id: 1,
                         title: 'Bridge to Terabithia',
                         author: 'Katherine Paterson',
-                        totalPages: 250,
+                        total_pages: 250,
                         summary: 'Childrens'
                     });
                     return [2 /*return*/];
