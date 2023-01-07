@@ -1,7 +1,7 @@
 import client from '../database';
 
 export type Book = {
-    id?: number;
+    id?: string | number;
     title: string;
     author: string;
     total_pages: number;
@@ -21,7 +21,7 @@ export class BookStore {
         }
     }
     // GET (READ)
-    async show(id: number): Promise<Book> {
+    async show(id: string): Promise<Book> {
         try {
             const conn = await client.connect();
             const sql = 'SELECT * FROM books where id = ($1)';
@@ -49,10 +49,11 @@ export class BookStore {
     }
 
     // DELETE
-    async delete(id: number): Promise<Book> {
+    async delete(id: string): Promise<Book> {
         try {
-            const conn = await client.connect();
             const sql = 'DELETE FROM books WHERE id = ($1)';
+            const conn = await client.connect();
+            
             const result = await conn.query(sql, [id]);
             conn.release();
             const book = result.rows[0];
