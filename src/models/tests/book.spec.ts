@@ -53,8 +53,7 @@ describe("Book Model", () => {
   });
 
   it('show method should return the correct book', async () => {
-    const result = await store.show(1);
-    console.log(result);
+    const result = await store.show('1');
     expect(result).toEqual({
       id: 1,
       title: 'Bridge to Terabithia',
@@ -65,7 +64,7 @@ describe("Book Model", () => {
   });
 
   it('delete method should remove the book', async () => {
-    store.delete(1);
+    store.delete('1');
     const result = await store.index();
     console.log(result);
     expect(result).toEqual([]);
