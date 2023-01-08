@@ -38,7 +38,7 @@ export class BookStore {
     async create(b: Book): Promise<Book> {
         try {
             const conn = await client.connect();
-            const sql = 'INSERT INTO books(title, author, total_pages, summary) VALUES($1, $2, $3, $4)';
+            const sql = 'INSERT INTO books(title, author, total_pages, summary) VALUES($1, $2, $3, $4) RETURNING *';
             const result = await conn.query(sql, [b.title, b.author, b.total_pages, b.summary]);
             conn.release();
             const book = result.rows[0];
@@ -56,8 +56,8 @@ export class BookStore {
             
             const result = await conn.query(sql, [id]);
             conn.release();
-            const book = result.rows[0];
-            return book;
+
+            return result.rows[0];
         } catch (error) {
             throw new Error(`Couldn't delete book. Error: ${error}`);
         }
