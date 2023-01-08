@@ -66,7 +66,6 @@ describe("Book Model", function () {
                     })];
                 case 1:
                     result = _a.sent();
-                    console.log(result);
                     expect(result).toEqual({
                         id: 1,
                         title: 'Bridge to Terabithia',
@@ -85,7 +84,6 @@ describe("Book Model", function () {
                 case 0: return [4 /*yield*/, store.index()];
                 case 1:
                     result = _a.sent();
-                    console.log(result);
                     expect(result).toEqual([{
                             id: 1,
                             title: 'Bridge to Terabithia',
@@ -119,12 +117,12 @@ describe("Book Model", function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    store.delete('1');
-                    return [4 /*yield*/, store.index()];
+                case 0: return [4 /*yield*/, store.delete('1')];
                 case 1:
+                    _a.sent();
+                    return [4 /*yield*/, store.index()];
+                case 2:
                     result = _a.sent();
-                    console.log(result);
                     expect(result).toEqual([]);
                     return [2 /*return*/];
             }

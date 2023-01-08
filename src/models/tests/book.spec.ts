@@ -30,7 +30,6 @@ describe("Book Model", () => {
       total_pages: 250,
       summary: 'Childrens'
     });
-    console.log(result);
     expect(result).toEqual({
       id: 1,
       title: 'Bridge to Terabithia',
@@ -42,7 +41,6 @@ describe("Book Model", () => {
 
   it('index method should return a list of books', async () => {
     const result = await store.index();
-    console.log(result);
     expect(result).toEqual([{
       id: 1,
       title: 'Bridge to Terabithia',
@@ -64,9 +62,8 @@ describe("Book Model", () => {
   });
 
   it('delete method should remove the book', async () => {
-    store.delete('1');
+    await store.delete('1');
     const result = await store.index();
-    console.log(result);
     expect(result).toEqual([]);
   });
 });
