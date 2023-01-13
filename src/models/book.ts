@@ -8,7 +8,7 @@ export type Book = {
     summary: string;
 }
 
-export class BookStore {
+export default class BookStore {
     async index(): Promise<Book[]> {
         try {
             const conn = await client.connect();
