@@ -18,7 +18,7 @@ let client = new Pool({
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
 });
-console.log(ENV)
+console.log(ENV);
 
 if(ENV === 'test') {
   client = new Pool({
