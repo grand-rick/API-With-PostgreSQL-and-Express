@@ -83,7 +83,7 @@ const authenticate = async (req: Request, res: Response) => {
 
 
 const usersRoutes = (app: express.Application) => {
-    app.get('/authenticate', authenticate);
+    app.get('/login', authenticate);
     app.post('/signup', create);
     app.get('/users', verifyAuthToken, index);
     app.get('/users/:id', verifyAuthToken, show);
