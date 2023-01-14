@@ -21,7 +21,7 @@ export default class OrderStore {
 	async create(o: Order): Promise<Order> {
 		try {
 			const sql =
-				'INSERT INTO (status, user_id) VALUES ($1, $2) RETURNING *';
+				'INSERT INTO orders (status, user_id) VALUES ($1, $2) RETURNING *';
 			const conn = await client.connect();
 			const result = await conn.query(sql, [o.status, o.user_id]);
 			conn.release();
@@ -57,18 +57,28 @@ export default class OrderStore {
 		quantity: string,
 		orderId: string,
 		productId: string
-	): Promise<Order> {
+	): Promise<Order | null> {
 		try {
-			const sql =
-				'INSERT INTO order_products (quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
 			const conn = await client.connect();
-			const result = await conn.query(sql, [
-				quantity,
-				orderId,
-				productId,
-			]);
-			conn.release();
-			return result.rows[0];
+            const getOrderStatusSql = 'SELECT status FROM orders WHERE id = $1';
+
+            const checkOrderStatusResult = await conn.query(getOrderStatusSql, [orderId]);
+
+            const orderStatus = checkOrderStatusResult.rows[0].status;
+
+            if (orderStatus === 'active') {
+                const sql =
+				'INSERT INTO order_products (quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
+                const result = await conn.query(sql, [
+                    quantity,
+                    orderId,
+                    productId,
+                ]);
+			    conn.release();
+                const addedProduct = result.rows[0];
+			    return addedProduct;
+            }
+			return null;
 		} catch (err) {
 			throw new Error(`Unable to add new Order. Error${err}`);
 		}
