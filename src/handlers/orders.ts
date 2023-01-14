@@ -49,10 +49,14 @@ const destroy = async (req: Request, res: Response) => {
 
 const addProduct = async (req: Request, res: Response) => {
 	const quantity = req.body.quantity;
-	const userId = req.body.userId;
 	const orderId = req.body.orderId;
+	const productId = req.body.productId;
 	try {
-		const newProduct = await store.addProduct(quantity, userId, orderId);
+		const newProduct = await store.addProduct(quantity, orderId, productId);
+        if (newProduct === null) {
+            res.json('Order is closed.');
+            return;
+        }
 		res.json(newProduct);
 	} catch (err) {
 		res.status(400);
