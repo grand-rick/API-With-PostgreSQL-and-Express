@@ -4,6 +4,7 @@ import book_store_routes from './handlers/books';
 import ordersRoutes from './handlers/orders';
 import productsRoutes from './handlers/products';
 import usersRoutes from './handlers/users';
+import dashboardRoutes from './handlers/dashboardRoutes';
 import cors from 'cors';
 import morgan from 'morgan';
 
@@ -22,6 +23,7 @@ book_store_routes(app);
 usersRoutes(app);
 ordersRoutes(app);
 productsRoutes(app);
+dashboardRoutes(app);
 
 app.get('/', function (req: Request, res: Response) {
 	res.send('Hello World!');
